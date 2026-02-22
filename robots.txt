@@ -1,0 +1,8 @@
+# Robots.txt for Peter Aufner Website
+# https://peter.aufner.org
+
+User-agent: *
+Allow: /
+
+# Sitemap location (update when sitemap is generated)
+Sitemap: https://peter.aufner.org/sitemap.xml

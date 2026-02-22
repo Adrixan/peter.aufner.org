@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="de-AT">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Widerstandsfähige Systeme aufbauen: In Code, im Unterricht, im Leben. Verfechter digitaler Souveränität, Pädagoge und Systemdenker mit Standort in Österreich.">
+
+    <!-- Security Headers (meta tags - actual headers set by server) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+
+    <!-- Preload Fonts -->
+    <link rel="preload" href="fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Inter.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/JetBrainsMono.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <title>Peter Aufner | Widerstandsfähige Systeme aufbauen</title>
+</head>
+
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
+
+    <!-- ===================================
+       Header
+       =================================== -->
+    <header class="header" role="banner">
+        <div class="container header__container">
+            <!-- Logo / Name -->
+            <a href="/" class="header__logo" aria-label="Peter Aufner - Home">
+                <span class="header__logo-text">PA</span>
+            </a>
+
+            <!-- Navigation -->
+            <nav class="header__nav" aria-label="Main navigation">
+                <ul class="header__nav-list" role="list">
+                    <li class="header__nav-item">
+                        <a href="#about" class="header__nav-link">Über mich</a>
+                    </li>
+                    <li class="header__nav-item">
+                        <a href="#pillars" class="header__nav-link">Schwerpunkte</a>
+                    </li>
+                    <li class="header__nav-item">
+                        <a href="#contact" class="header__nav-link">Kontakt</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="header__menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+                <span class="header__menu-icon" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav class="header__mobile-nav" id="mobile-menu" aria-label="Mobile navigation">
+            <ul class="header__mobile-nav-list" role="list">
+                <li>
+                    <a href="#about" class="header__mobile-nav-link">Über mich</a>
+                </li>
+                <li>
+                    <a href="#pillars" class="header__mobile-nav-link">Schwerpunkte</a>
+                </li>
+                <li>
+                    <a href="#contact" class="header__mobile-nav-link">Kontakt</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Spacer to prevent content from hiding behind fixed header -->
+    <div class="header-spacer" aria-hidden="true"></div>
+
+    <!-- ===================================
+       Main Content
+       =================================== -->
+    <main id="main-content">
+
+        <!-- ===================================
+         Hero Section
+         =================================== -->
+        <section id="hero" class="hero">
+            <div class="container hero__container">
+                <div class="hero__content">
+                    <h1 class="hero__tagline">Widerstandsfähige Systeme aufbauen</h1>
+                    <p class="hero__subtitle">In Code, im Unterricht, im Leben</p>
+                    <p class="hero__description">Verfechter digitaler Souveränität, Pädagoge und Systemdenker.
+                        Ich helfe Menschen, komplexe Systeme zu verstehen und neu aufzubauen.</p>
+                    <div class="hero__actions">
+                        <a href="#about" class="btn btn--secondary btn--md">Über mich</a>
+                        <a href="#contact" class="btn btn--primary btn--md">Kontakt</a>
+                    </div>
+                </div>
+                <div class="hero__image">
+                    <!-- Portrait Image -->
+                    <img src="images/portrait.jpg" alt="Peter Aufner - Portrait" class="hero__portrait" loading="eager">
+                </div>
+            </div>
+            <!-- Decorative Elements -->
+            <div class="hero__decoration" aria-hidden="true">
+                <div class="hero__glow"></div>
+            </div>
+        </section>
+
+        <!-- ===================================
+         About / Philosophy Section
+         =================================== -->
+        <section id="about" class="section section--default">
+            <div class="container section__container">
+                <header class="section__header">
+                    <h2 class="section__title">Philosophie</h2>
+                    <p class="section__subtitle">Die Denkweise eines Architekten</p>
+                </header>
+                <div class="section__content">
+                    <div class="about">
+                        <!-- Manifesto -->
+                        <div class="about__manifesto glass-panel">
+                            <p class="about__paragraph">Ich betrachte das Leben als Systemarchitekt. Nachhaltige
+                                Freiheit
+                                erfordert absichtsvolles Design – ob ich Code debugge, einen Lehrplan restrukturiere
+                                oder
+                                meine Morgenroutine plane.</p>
+                            <p class="about__paragraph">Die Hacker-Mentalität handelt vom Verstehen, wie Dinge
+                                funktionieren,
+                                um sie besser wieder aufzubauen. Konstruktive Neugier statt destruktiver Kritik.</p>
+                        </div>
+
+                        <!-- Core Values -->
+                        <div class="about__values">
+                            <h3 class="about__values-title">Kernwerte</h3>
+                            <div class="about__values-grid">
+                                <article class="about__value glass-panel">
+                                    <h4 class="about__value-title">Digitale Souveränität</h4>
+                                    <p class="about__value-description">Wahre Freiheit im digitalen Zeitalter erfordert
+                                        das Verstehen der eigenen Infrastruktur. Self-Hosting, Privacy-by-Design und
+                                        digitale Selbstbestimmung.</p>
+                                </article>
+                                <article class="about__value glass-panel">
+                                    <h4 class="about__value-title">Bewusste Disziplin</h4>
+                                    <p class="about__value-description">Frühe Morgenstunden, regelmäßiger Sport und
+                                        Systemdenken – der Aufbau von Kapazität für die Arbeit, die zählt.</p>
+                                </article>
+                                <article class="about__value glass-panel">
+                                    <h4 class="about__value-title">Tieferes Lernen</h4>
+                                    <p class="about__value-description">Im Zeitalter von KI wird kritisches Denken
+                                        wertvoller. Technologie verstehen und gestalten, nicht nur nutzen.</p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================
+         Pillars Section
+         =================================== -->
+        <section id="pillars" class="section section--default">
+            <div class="container section__container">
+                <header class="section__header">
+                    <h2 class="section__title">Schwerpunkte</h2>
+                    <p class="section__subtitle">Drei Wirkungsebenen</p>
+                </header>
+                <div class="section__content">
+                    <div class="pillars">
+                        <!-- Pillar 1: Digital Sovereignty -->
+                        <article class="pillar glass-panel">
+                            <div class="pillar__header">
+                                <div class="pillar__icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    </svg>
+                                </div>
+                                <div class="pillar__meta">
+                                    <h3 class="pillar__title">Digitale Souveränität</h3>
+                                    <span class="pillar__role">Der Experte</span>
+                                </div>
+                            </div>
+                            <p class="pillar__description">Beratung zur KI-Regulierung im EU-Kontext, Implementierung
+                                von
+                                datenschutzfreundlichen Technologien und digitale Selbstbestimmung.</p>
+                            <ul class="pillar__topics" aria-label="Topics">
+                                <li class="pillar__topic">KI-Regulierung</li>
+                                <li class="pillar__topic">Datenschutz-Tools</li>
+                                <li class="pillar__topic">Self-Hosting</li>
+                                <li class="pillar__topic">Dateneigentum</li>
+                            </ul>
+                        </article>
+
+                        <!-- Pillar 2: Agile Classroom -->
+                        <article class="pillar glass-panel">
+                            <div class="pillar__header">
+                                <div class="pillar__icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="pillar__meta">
+                                    <h3 class="pillar__title">Das Agile Klassenzimmer</h3>
+                                    <span class="pillar__role">Der Pädagoge</span>
+                                </div>
+                            </div>
+                            <p class="pillar__description">Agile Methoden in der Sekundarstufe: iteratives Arbeiten,
+                                effektive Zusammenarbeit und Anpassungsfähigkeit. Digitale Grundbildung für lebenslanges
+                                Lernen.</p>
+                            <ul class="pillar__topics" aria-label="Topics">
+                                <li class="pillar__topic">Scrum in Schulen</li>
+                                <li class="pillar__topic">Tieferes Lernen</li>
+                                <li class="pillar__topic">Digitale Grundbildung</li>
+                                <li class="pillar__topic">Kritisches Denken</li>
+                            </ul>
+                        </article>
+
+                        <!-- Pillar 3: Base Layer -->
+                        <article class="pillar glass-panel">
+                            <div class="pillar__header">
+                                <div class="pillar__icon" aria-hidden="true">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M8 3l4 8 5-5 5 15H2L8 3z"></path>
+                                    </svg>
+                                </div>
+                                <div class="pillar__meta">
+                                    <h3 class="pillar__title">Die Basisschicht</h3>
+                                    <span class="pillar__role">Der Lebensstil</span>
+                                </div>
+                            </div>
+                            <p class="pillar__description">Frühe Morgenstunden, Ausdauersport, minimalistische
+                                Prinzipien und
+                                Systemdenken – das Fundament, das alles andere ermöglicht.</p>
+                            <ul class="pillar__topics" aria-label="Topics">
+                                <li class="pillar__topic">4:30 Uhr Routine</li>
+                                <li class="pillar__topic">Ultralauf</li>
+                                <li class="pillar__topic">Systemdenken</li>
+                                <li class="pillar__topic">Minimalismus</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================
+         Contact Section
+         =================================== -->
+        <section id="contact" class="section section--default">
+            <div class="container section__container">
+                <header class="section__header">
+                    <h2 class="section__title">Kontakt aufnehmen</h2>
+                    <p class="section__subtitle">Lassen Sie uns gemeinsam etwas Widerstandsfähiges aufbauen</p>
+                </header>
+                <div class="section__content">
+                    <div class="contact">
+                        <div class="contact__content">
+                            <!-- Email -->
+                            <div class="contact__email glass-panel">
+                                <a href="mailto:peter@aufner.org" class="contact__email-link">Schreib mir eine
+                                    E-Mail!</a>
+                            </div>
+
+                            <!-- Two-column layout for Social Media and Websites -->
+                            <div class="contact__columns">
+                                <!-- Social Media -->
+                                <div class="contact__social">
+                                    <h3 class="contact__social-title">Social Media</h3>
+                                    <ul class="contact__social-list" role="list">
+                                        <li class="contact__social-item">
+                                            <a href="https://github.com/Adrixan/" class="contact__social-link"
+                                                target="_blank" rel="noopener noreferrer">
+                                                <span class="contact__social-platform">GitHub</span>
+                                            </a>
+                                        </li>
+                                        <li class="contact__social-item">
+                                            <a href="https://www.linkedin.com/in/peter-aufner-b16abb18a/"
+                                                class="contact__social-link" target="_blank" rel="noopener noreferrer">
+                                                <span class="contact__social-platform">LinkedIn</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- Meine weiteren Websites -->
+                                <div class="contact__websites">
+                                    <h3 class="contact__websites-title">Meine weiteren Websites</h3>
+                                    <ul class="contact__websites-list" role="list">
+                                        <li class="contact__websites-item">
+                                            <a href="https://prof.aufner.org" class="contact__websites-link"
+                                                target="_blank" rel="noopener noreferrer">
+                                                Meine Social Media Präsenz
+                                            </a>
+                                        </li>
+                                        <li class="contact__websites-item">
+                                            <a href="https://code-alongsi.de" class="contact__websites-link"
+                                                target="_blank" rel="noopener noreferrer">
+                                                Meine Firma
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===================================
+       Footer
+       =================================== -->
+    <footer class="footer" role="contentinfo">
+        <div class="container footer__container">
+            <div class="footer__content">
+                <!-- Logo/Name -->
+                <div class="footer__brand">
+                    <span class="footer__logo">PA</span>
+                    <span class="footer__tagline">Widerstandsfähige Systeme aufbauen</span>
+                </div>
+
+                <!-- Website Links -->
+                <nav class="footer__links" aria-label="Website links">
+                    <ul class="footer__links-list" role="list">
+                        <li class="footer__links-item">
+                            <a href="https://prof.aufner.org" class="footer__links-link" target="_blank"
+                                rel="noopener noreferrer">
+                                Prof. Aufner Website
+                            </a>
+                        </li>
+                        <li class="footer__links-item">
+                            <a href="https://code-alongsi.de" class="footer__links-link" target="_blank"
+                                rel="noopener noreferrer">
+                                Company Website
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Copyright -->
+                <p class="footer__copyright">© 2026 Peter Aufner. Mit Intention gebaut.</p>
+
+                <!-- Back to Top -->
+                <a href="#hero" class="footer__back-to-top">
+                    Nach oben
+                    <span aria-hidden="true"> ↑</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
