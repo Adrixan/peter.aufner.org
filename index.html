@@ -7,18 +7,22 @@
     <meta name="description"
         content="Widerstandsfähige Systeme aufbauen: In Code, im Unterricht, im Leben. Verfechter digitaler Souveränität, Pädagoge und Systemdenker mit Standort in Österreich.">
 
-    <!-- Security Headers (meta tags - actual headers set by server) -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
+    <!-- Dark mode is the default and only scheme (Bioluminescent Night) -->
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#121212">
+
+    <!-- Security: only the CSP and referrer policy are honoured as meta tags.
+         X-Content-Type-Options, X-Frame-Options and frame-ancestors need real HTTP headers (see .htaccess). -->
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
     <meta name="referrer" content="strict-origin-when-cross-origin">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 
-    <!-- Preload Fonts -->
-    <link rel="preload" href="fonts/SpaceGrotesk.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" href="fonts/Inter.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-    <link rel="preload" href="fonts/JetBrainsMono.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <!-- Preload the fonts needed above the fold (headings, body) -->
+    <link rel="preload" href="fonts/space-grotesk-latin-700.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/inter-latin-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
@@ -36,12 +40,12 @@
     <header class="header" role="banner">
         <div class="container header__container">
             <!-- Logo / Name -->
-            <a href="/" class="header__logo" aria-label="Peter Aufner - Home">
+            <a href="/" class="header__logo" aria-label="Peter Aufner, Startseite">
                 <span class="header__logo-text">PA</span>
             </a>
 
             <!-- Navigation -->
-            <nav class="header__nav" aria-label="Main navigation">
+            <nav class="header__nav" aria-label="Hauptnavigation">
                 <ul class="header__nav-list" role="list">
                     <li class="header__nav-item">
                         <a href="#about" class="header__nav-link">Über mich</a>
@@ -56,7 +60,7 @@
             </nav>
 
             <!-- Mobile Menu Button -->
-            <button class="header__menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+            <button class="header__menu-btn" aria-label="Menü umschalten" aria-expanded="false" aria-controls="mobile-menu">
                 <span class="header__menu-icon" aria-hidden="true">
                     <span></span>
                     <span></span>
@@ -66,7 +70,7 @@
         </div>
 
         <!-- Mobile Navigation Menu -->
-        <nav class="header__mobile-nav" id="mobile-menu" aria-label="Mobile navigation">
+        <nav class="header__mobile-nav" id="mobile-menu" aria-label="Mobile Navigation">
             <ul class="header__mobile-nav-list" role="list">
                 <li>
                     <a href="#about" class="header__mobile-nav-link">Über mich</a>
@@ -106,7 +110,7 @@
                 </div>
                 <div class="hero__image">
                     <!-- Portrait Image -->
-                    <img src="images/portrait.jpg" alt="Peter Aufner - Portrait" class="hero__portrait" loading="eager">
+                    <img src="images/portrait.jpg" alt="Porträt von Peter Aufner" class="hero__portrait" width="350" height="350" loading="eager" fetchpriority="high">
                 </div>
             </div>
             <!-- Decorative Elements -->
@@ -193,7 +197,7 @@
                             <p class="pillar__description">Beratung zur KI-Regulierung im EU-Kontext, Implementierung
                                 von
                                 datenschutzfreundlichen Technologien und digitale Selbstbestimmung.</p>
-                            <ul class="pillar__topics" aria-label="Topics">
+                            <ul class="pillar__topics" aria-label="Themen">
                                 <li class="pillar__topic">KI-Regulierung</li>
                                 <li class="pillar__topic">Datenschutz-Tools</li>
                                 <li class="pillar__topic">Self-Hosting</li>
@@ -220,7 +224,7 @@
                             <p class="pillar__description">Agile Methoden in der Sekundarstufe: iteratives Arbeiten,
                                 effektive Zusammenarbeit und Anpassungsfähigkeit. Digitale Grundbildung für lebenslanges
                                 Lernen.</p>
-                            <ul class="pillar__topics" aria-label="Topics">
+                            <ul class="pillar__topics" aria-label="Themen">
                                 <li class="pillar__topic">Scrum in Schulen</li>
                                 <li class="pillar__topic">Tieferes Lernen</li>
                                 <li class="pillar__topic">Digitale Grundbildung</li>
@@ -245,7 +249,7 @@
                             <p class="pillar__description">Frühe Morgenstunden, Ausdauersport, minimalistische
                                 Prinzipien und
                                 systemisches Denken – das Fundament, das alles andere ermöglicht.</p>
-                            <ul class="pillar__topics" aria-label="Topics">
+                            <ul class="pillar__topics" aria-label="Themen">
                                 <li class="pillar__topic">4:30 Uhr Routine</li>
                                 <li class="pillar__topic">Sport</li>
                                 <li class="pillar__topic">systemisches Denken</li>

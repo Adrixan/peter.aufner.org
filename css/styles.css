@@ -19,7 +19,8 @@
     --color-bg-primary: var(--color-void-charcoal);
     --color-bg-secondary: var(--color-deep-slate);
     --color-text-primary: var(--color-starlight-grey);
-    --color-text-muted: #9ca3af;
+    /* Derived from the palette (Starlight Grey 70% on Void Charcoal), about 7.3:1 contrast */
+    --color-text-muted: color-mix(in srgb, var(--color-starlight-grey) 70%, var(--color-void-charcoal));
     --color-accent-primary: var(--color-digital-fern);
     --color-accent-secondary: var(--color-cyber-mint);
     --color-accent-warning: var(--color-signal-amber);
@@ -84,6 +85,9 @@
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
     --shadow-glow: 0 0 20px rgb(74 222 128 / 0.15);
 
+    /* Brand monogram: "PA" in a hexagon (BRANDING.md, Logo Concepts) */
+    --shape-hexagon: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
+
     /* Transitions */
     --transition-fast: 0.15s ease;
     --transition-normal: 0.25s ease;
@@ -101,26 +105,43 @@
 /* ===================================
    Font Face Declarations
    =================================== */
+/* Paths are relative to this stylesheet (css/), hence ../fonts/ */
 @font-face {
     font-family: "Space Grotesk";
-    src: url("fonts/SpaceGrotesk.woff2") format("woff2");
-    font-weight: 400 700;
+    src: url("../fonts/space-grotesk-latin-500.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Space Grotesk";
+    src: url("../fonts/space-grotesk-latin-700.woff2") format("woff2");
+    font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: "Inter";
-    src: url("fonts/Inter.woff2") format("woff2");
-    font-weight: 400 700;
+    src: url("../fonts/inter-latin-400.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/inter-latin-600.woff2") format("woff2");
+    font-weight: 600;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
     font-family: "JetBrains Mono";
-    src: url("fonts/JetBrainsMono.woff2") format("woff2");
-    font-weight: 400 700;
+    src: url("../fonts/jetbrains-mono-latin-400.woff2") format("woff2");
+    font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
@@ -411,7 +432,7 @@ pre code {
             var(--color-accent-primary),
             var(--color-accent-secondary));
     color: var(--color-bg-primary);
-    border-radius: var(--radius-md);
+    clip-path: var(--shape-hexagon);
     font-weight: var(--font-weight-bold);
 }
 
@@ -419,6 +440,10 @@ pre code {
     outline: 2px solid var(--color-accent-primary);
     outline-offset: 2px;
     border-radius: var(--radius-md);
+}
+
+.header__logo:hover .header__logo-text {
+    filter: brightness(1.1);
 }
 
 /* Navigation */
@@ -453,7 +478,8 @@ pre code {
     transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
-.header__nav-link:hover {
+.header__nav-link:hover,
+.header__nav-link.is-active {
     color: var(--color-accent-primary);
     background-color: rgb(74 222 128 / 0.1);
 }
@@ -561,7 +587,8 @@ pre code {
     transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
-.header__mobile-nav-link:hover {
+.header__mobile-nav-link:hover,
+.header__mobile-nav-link.is-active {
     color: var(--color-accent-primary);
     background-color: rgb(74 222 128 / 0.1);
 }
@@ -1686,7 +1713,7 @@ a.card:hover .card__title {
             var(--color-accent-primary),
             var(--color-accent-secondary));
     color: var(--color-bg-primary);
-    border-radius: var(--radius-sm);
+    clip-path: var(--shape-hexagon);
     font-family: var(--font-family-heading);
     font-weight: var(--font-weight-bold);
     font-size: var(--font-size-sm);

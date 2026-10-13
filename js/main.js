@@ -99,8 +99,10 @@
             if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
                 navLinks.forEach(function (link) {
                     link.classList.remove("is-active");
+                    link.removeAttribute("aria-current");
                     if (link.getAttribute("href") === "#" + sectionId) {
                         link.classList.add("is-active");
+                        link.setAttribute("aria-current", "true");
                     }
                 });
             }
