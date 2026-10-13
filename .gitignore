@@ -1,2 +1,9 @@
 node_modules
 *.md
+
+# Project instructions for AI harnesses are tracked despite the *.md rule above
+!CLAUDE.md
+
+# Local-only: deploy build/backups, preview-server config
+.scratch/
+.claude/
