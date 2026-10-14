@@ -13,6 +13,9 @@
 # Config: DEPLOY_HOST (SSH alias from ~/.ssh/config, default aufner.org)
 #         DEPLOY_DIR  (relative to the SSH home, default peter.aufner.org)
 #         DEPLOY_URL  (default https://peter.aufner.org)
+#         DEPLOY_JUMP (optional SSH alias of a jump host, e.g. m11x. Use it when this machine's IP is
+#                      blocked by the host: SSH goes via -J, and the smoke test curl calls go through
+#                      a SOCKS tunnel over the same jump host)
 # No credentials in this script: authentication goes through ~/.ssh/config and the SSH key.
 
 set -euo pipefail
@@ -20,6 +23,7 @@ set -euo pipefail
 HOST="${DEPLOY_HOST:-aufner.org}"
 REMOTE_DIR="${DEPLOY_DIR:-peter.aufner.org}"
 SITE_URL="${DEPLOY_URL:-https://peter.aufner.org}"
+JUMP="${DEPLOY_JUMP:-}"
 KEEP_BACKUPS=10
 
 # Only these paths are ever deployed. Anything else in the repo (plans/, *.md, .kilocode, deploy/)
@@ -48,8 +52,15 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 
 SSH_OPTS=(-o BatchMode=yes -o ConnectTimeout=15
           -o ControlMaster=auto -o ControlPath="$WORK/ssh.sock" -o ControlPersist=120)
+[ -z "$JUMP" ] || SSH_OPTS+=(-J "$JUMP")
 remote() { ssh "${SSH_OPTS[@]}" "$HOST" "$@"; }
-close_ssh() { ssh "${SSH_OPTS[@]}" -O exit "$HOST" >/dev/null 2>&1 || true; }
+JUMP_CTL="$WORK/jump.sock"
+close_ssh() {
+    ssh "${SSH_OPTS[@]}" -O exit "$HOST" >/dev/null 2>&1 || true
+    [ -z "$JUMP" ] || ssh -o ControlPath="$JUMP_CTL" -O exit "$JUMP" >/dev/null 2>&1 || true
+}
+# curl runs locally, or through a SOCKS tunnel on the jump host when DEPLOY_JUMP is set
+CURL=(curl)
 
 # ---------------------------------------------------------------- Preflight (local)
 dirty="$(git status --porcelain --untracked-files=all -- "${INCLUDE[@]}")"
@@ -153,6 +164,15 @@ fi
 
 # ---------------------------------------------------------------- Remote preflight
 trap close_ssh EXIT
+if [ -n "$JUMP" ]; then
+    SOCKS_PORT="$(python3 -I -c 'import socket; s=socket.socket(); s.bind(("127.0.0.1",0)); print(s.getsockname()[1])')"
+    ssh -o BatchMode=yes -o ConnectTimeout=15 -o ExitOnForwardFailure=yes \
+        -o ControlMaster=yes -o ControlPath="$JUMP_CTL" -o ControlPersist=300 \
+        -fN -D "127.0.0.1:$SOCKS_PORT" "$JUMP" \
+        || die "Cannot open SOCKS tunnel via jump host $JUMP."
+    CURL=(curl --socks5-hostname "127.0.0.1:$SOCKS_PORT")
+    log "Using jump host $JUMP for SSH and smoke test"
+fi
 remote "true" || die "SSH connection to $HOST failed (host unreachable or this IP is blocked). Not retrying."
 if ! remote "test -d '$REMOTE_DIR'"; then
     warn "Remote directory $REMOTE_DIR does not exist, creating it (check that the vhost docroot points here)."
@@ -192,7 +212,7 @@ tar -C "$BUILD" -cf - -T "$WORK/manifest.new" \
     | remote "tar -xf - -C '$REMOTE_DIR' --no-same-owner --no-same-permissions --no-overwrite-dir"
 
 # ---------------------------------------------------------------- Smoke test
-http_code() { curl -s -o /dev/null --max-time 20 -w '%{http_code}' "$1" || true; }
+http_code() { "${CURL[@]}" -s -o /dev/null --max-time 20 -w '%{http_code}' "$1" || true; }
 fail=0
 check() {  # check <path> <expected-code>
     local code; code="$(http_code "$SITE_URL$1")"
@@ -206,10 +226,10 @@ while IFS= read -r f; do
     check "/$f" 200
 done < "$WORK/manifest.new"
 for f in $(grep '\.woff2$' "$WORK/manifest.new"); do
-    m="$( (curl -s --max-time 20 "$SITE_URL/$f" | head -c4) || true)"
+    m="$( ("${CURL[@]}" -s --max-time 20 "$SITE_URL/$f" | head -c4) || true)"
     [ "$m" = "wOF2" ] || { warn "  FAIL /$f is not served as a real woff2 file"; fail=1; }
 done
-body="$(curl -s --max-time 20 "$SITE_URL/" || true)"
+body="$("${CURL[@]}" -s --max-time 20 "$SITE_URL/" || true)"
 case "$body" in *"Widerstandsfähige Systeme aufbauen"*) log "  ok   homepage has expected content" ;;
                 *) warn "  FAIL homepage without expected content"; fail=1 ;; esac
 case "$body" in *googleapis.com*|*gstatic.com*) warn "  FAIL third-party font reference on homepage"; fail=1 ;; esac
@@ -226,7 +246,7 @@ fi
 remote "cat > '$REMOTE_DIR/.deploy-manifest'" < "$WORK/manifest.new"
 
 # Soft checks (warnings only)
-hdrs="$(curl -sI --max-time 20 "$SITE_URL/" | tr -d '\r' | tr 'A-Z' 'a-z' || true)"
+hdrs="$("${CURL[@]}" -sI --max-time 20 "$SITE_URL/" | tr -d '\r' | tr 'A-Z' 'a-z' || true)"
 for h in content-security-policy x-content-type-options x-frame-options referrer-policy strict-transport-security; do
     case "$hdrs" in *"$h:"*) log "  ok   header $h" ;; *) warn "header $h missing (is .htaccess honoured?)" ;; esac
 done
