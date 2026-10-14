@@ -15,8 +15,12 @@ An update is not finished until it is live. After every change that touches the 
 Only the allowlist at the top of the script is ever uploaded. A backup is taken before every upload
 and restored automatically if the smoke test fails.
 
-If SSH or HTTPS to `aufner.org` answers "connection refused", the host has most likely blocked the
-current public IP. Report it and do not retry in a loop, and do not route around the block.
+If SSH or HTTPS to `aufner.org` answers "connection refused" on 22, 80 and 443, the host has blocked
+the current public IP (seen on 2026-10-13 and again for m11x on 2026-10-14 right after a deploy).
+Probable trigger: scanner-like requests such as `/.git/HEAD`, so the smoke test does not send them
+unless `DEPLOY_PROBE_BLOCKED=1`. When blocked, report it and do not retry in a loop. Routing through a
+jump host (`DEPLOY_JUMP=<ssh alias>`) is a workaround only when the user explicitly authorises that
+host for the current task; it is not a standing permission.
 
 ## Styleguide
 

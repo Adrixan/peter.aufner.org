@@ -16,6 +16,8 @@
 #         DEPLOY_JUMP (optional SSH alias of a jump host, e.g. m11x. Use it when this machine's IP is
 #                      blocked by the host: SSH goes via -J, and the smoke test curl calls go through
 #                      a SOCKS tunnel over the same jump host)
+#         DEPLOY_PROBE_BLOCKED=1 (also request /.git/HEAD etc. to verify they are blocked;
+#                      off by default, such requests can get the source IP banned)
 # No credentials in this script: authentication goes through ~/.ssh/config and the SSH key.
 
 set -euo pipefail
@@ -250,9 +252,16 @@ hdrs="$("${CURL[@]}" -sI --max-time 20 "$SITE_URL/" | tr -d '\r' | tr 'A-Z' 'a-z
 for h in content-security-policy x-content-type-options x-frame-options referrer-policy strict-transport-security; do
     case "$hdrs" in *"$h:"*) log "  ok   header $h" ;; *) warn "header $h missing (is .htaccess honoured?)" ;; esac
 done
-for p in /.htaccess /.deploy-manifest /.git/HEAD /deploy/deploy.sh /README.md; do
-    c="$(http_code "$SITE_URL$p")"
-    case "$c" in 404|403) log "  ok   $p blocked ($c)" ;; *) warn "$p is reachable ($c)" ;; esac
-done
+# Requests for /.git/HEAD, /.htaccess and the like are textbook scanner traffic. A Plesk fail2ban jail
+# probably banned the source IP for exactly these (observed 2026-10-13/14: blocked on 22, 80 and 443
+# after deploys that ran them). Opt-in only: DEPLOY_PROBE_BLOCKED=1 deploy/deploy.sh
+if [ "${DEPLOY_PROBE_BLOCKED:-0}" = 1 ]; then
+    for p in /.htaccess /.deploy-manifest /.git/HEAD /deploy/deploy.sh /README.md; do
+        c="$(http_code "$SITE_URL$p")"
+        case "$c" in 404|403) log "  ok   $p blocked ($c)" ;; *) warn "$p is reachable ($c)" ;; esac
+    done
+else
+    log "  skip blocked-path probes (opt-in, they resemble scanner traffic)"
+fi
 
 log "Done: $COMMIT live at $SITE_URL"
