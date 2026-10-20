@@ -1,0 +1,49 @@
+# peter.aufner.org - Apache configuration (same rule set as prof.aufner.org)
+# Real HTTP headers: the meta tags in index.html cannot carry frame-ancestors,
+# X-Frame-Options or X-Content-Type-Options.
+
+AddDefaultCharset UTF-8
+DirectoryIndex index.html
+Options -Indexes
+ServerSignature Off
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Force HTTPS only when the proxy explicitly reports plain http (avoids loops behind Plesk-nginx)
+    RewriteCond %{HTTP:X-Forwarded-Proto} =http
+    RewriteRule ^ https://peter.aufner.org%{REQUEST_URI} [R=301,L]
+
+    # Block dotfiles and dot-directories, keep .well-known reachable
+    RewriteRule (^|/)\.(?!well-known(/|$)) - [R=404,L]
+
+    # Block internal and sensitive files
+    RewriteRule ^(deploy|plans)(/|$) - [R=404,L]
+    RewriteRule \.(md|bak|orig|old|swp|map|sql|log|ini|sh|ya?ml|lock)$ - [R=404,L,NC]
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "accelerometer=(), autoplay=(), browsing-topics=(), camera=(), display-capture=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    # HSTS is already sent by the host (Plesk-nginx); a second header would be duplicated.
+    Header always unset X-Powered-By
+    Header unset Server
+
+    # Caching
+    <FilesMatch "\.(woff2)$">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </FilesMatch>
+    <FilesMatch "\.(jpe?g|png|webp|svg|ico)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+    <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+    <FilesMatch "\.(html|txt|xml)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+</IfModule>

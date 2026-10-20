@@ -99,8 +99,10 @@
             if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
                 navLinks.forEach(function (link) {
                     link.classList.remove("is-active");
+                    link.removeAttribute("aria-current");
                     if (link.getAttribute("href") === "#" + sectionId) {
                         link.classList.add("is-active");
+                        link.setAttribute("aria-current", "true");
                     }
                 });
             }
@@ -118,44 +120,6 @@
 
     // Run once on load
     highlightActiveSection();
-
-    // ===================================
-    // Form Validation (Basic)
-    // ===================================
-    const contactForm = document.querySelector(".contact__form");
-
-    if (contactForm) {
-        contactForm.addEventListener("submit", function (e) {
-            const inputs = this.querySelectorAll("input[required], textarea[required]");
-            let isValid = true;
-
-            inputs.forEach(function (input) {
-                if (!input.value.trim()) {
-                    isValid = false;
-                    input.classList.add("is-invalid");
-                } else {
-                    input.classList.remove("is-invalid");
-                }
-            });
-
-            if (!isValid) {
-                e.preventDefault();
-                // Focus first invalid input
-                const firstInvalid = this.querySelector(".is-invalid");
-                if (firstInvalid) {
-                    firstInvalid.focus();
-                }
-            }
-        });
-
-        // Remove invalid state on input
-        const formInputs = contactForm.querySelectorAll("input, textarea");
-        formInputs.forEach(function (input) {
-            input.addEventListener("input", function () {
-                this.classList.remove("is-invalid");
-            });
-        });
-    }
 
     // ===================================
     // Reduced Motion Support
