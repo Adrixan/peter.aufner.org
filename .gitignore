@@ -7,3 +7,6 @@ node_modules
 # Local-only: deploy build/backups, preview-server config
 .scratch/
 .claude/
+# Agent state files are tracked so every machine can pick up the work (2026-11-04)
+!.agents/
+!.agents/*.md
