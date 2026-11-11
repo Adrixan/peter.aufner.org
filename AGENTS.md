@@ -35,3 +35,7 @@ and SVG for it, so violations fail the deploy.
 - Monogram is a hexagon with "PA" (`--shape-hexagon`, `images/favicon.svg`).
 - Dark mode only, glassmorphism panels, generous negative space.
 - German UI copy, `lang="de-AT"`, so ARIA labels and alt texts are German too.
+
+## Web platform (Peter, 2026-11-11)
+- New or changed HTML, CSS and client-side JS start from skill `modern-web-guidance` (installed CLI `modern-web-guidance`, not `npx`) and are checked in the browser with the `chrome-devtools` MCP.
+- Weekly modernization: `web-modernize` (Sundays 08:00, list `~/sync/ai/web-projects.txt`) runs `legacy-scan`, applies only verified behaviour-preserving fixes through this file's test and publish rules, and files larger changes in `.agents/to-do.md`.
