@@ -38,4 +38,4 @@ and SVG for it, so violations fail the deploy.
 
 ## Web platform (Peter, 2026-11-11)
 - New or changed HTML, CSS and client-side JS start from skill `modern-web-guidance` (installed CLI `modern-web-guidance`, not `npx`) and are checked in the browser with the `chrome-devtools` MCP.
-- Weekly modernization: `web-modernize` (Sundays 08:00, list `~/sync/ai/web-projects.txt`) runs `legacy-scan`, applies only verified behaviour-preserving fixes through this file's test and publish rules, and files larger changes in `.agents/to-do.md`.
+- One-off modernization: `web-modernize` (2026-11-15, list `~/sync/ai/web-projects.txt`) runs `legacy-scan`, applies only verified behaviour-preserving fixes through this file's test and publish rules, and files larger changes in `.agents/to-do.md`; after that the rule above is the standard for all web work here.
