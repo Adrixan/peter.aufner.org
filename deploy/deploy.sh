@@ -13,7 +13,8 @@
 # Config: DEPLOY_HOST (SSH alias from ~/.ssh/config, default aufner.org)
 #         DEPLOY_DIR  (relative to the SSH home, default peter.aufner.org)
 #         DEPLOY_URL  (default https://peter.aufner.org)
-#         DEPLOY_JUMP (optional SSH alias of a jump host, e.g. m11x. Use it when this machine's IP is
+#         DEPLOY_VIA  (optional SSH alias of a jump host, e.g. m11x; same name as in prof.aufner.org.
+#                      DEPLOY_JUMP is still accepted as an alias. Use it when this machine's IP is
 #                      blocked by the host: SSH goes via -J, and the smoke test curl calls go through
 #                      a SOCKS tunnel over the same jump host)
 #         DEPLOY_PROBE_BLOCKED=1 (also request /.git/HEAD etc. to verify they are blocked;
@@ -25,7 +26,7 @@ set -euo pipefail
 HOST="${DEPLOY_HOST:-aufner.org}"
 REMOTE_DIR="${DEPLOY_DIR:-peter.aufner.org}"
 SITE_URL="${DEPLOY_URL:-https://peter.aufner.org}"
-JUMP="${DEPLOY_JUMP:-}"
+JUMP="${DEPLOY_VIA:-${DEPLOY_JUMP:-}}"
 KEEP_BACKUPS=10
 
 # Only these paths are ever deployed. Anything else in the repo (plans/, *.md, .kilocode, deploy/)
@@ -61,7 +62,7 @@ close_ssh() {
     ssh "${SSH_OPTS[@]}" -O exit "$HOST" >/dev/null 2>&1 || true
     [ -z "$JUMP" ] || ssh -o ControlPath="$JUMP_CTL" -O exit "$JUMP" >/dev/null 2>&1 || true
 }
-# curl runs locally, or through a SOCKS tunnel on the jump host when DEPLOY_JUMP is set
+# curl runs locally, or through a SOCKS tunnel on the jump host when DEPLOY_VIA is set
 CURL=(curl)
 
 # ---------------------------------------------------------------- Preflight (local)

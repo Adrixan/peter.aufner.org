@@ -1323,6 +1323,29 @@ pre code {
     margin: 0;
 }
 
+.footer__disclosure {
+    max-inline-size: 65ch;
+    font-size: var(--font-size-xs);
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    text-wrap: pretty;
+    margin: 0;
+}
+
+.footer__disclosure a {
+    color: var(--color-accent-primary);
+}
+
+.footer__disclosure a:hover {
+    color: var(--color-accent-secondary);
+}
+
+.footer__disclosure a:focus-visible {
+    outline: 2px solid var(--color-accent-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
 .footer__back-to-top {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
