@@ -1,29 +1,18 @@
-# Session handoff: peter.aufner.org (2026-10-14)
+# Session handoff: peter.aufner.org (2026-11-14)
+
+## Trajectory
+Brief from the dispatcher "Code" (Peter's decisions in `Open tasks.md`, 2026-11-14 18:24): D14 A and D31 A. Both done and live.
 
 ## State
-- LIVE: commit b9f7659 deployed 2026-10-14 09:41 via `DEPLOY_JUMP=m11x deploy/deploy.sh`.
-  Backup of the previous server state: `.scratch/deploy-backups/peter.aufner.org-20261014-094156.tar.gz` (10 MB).
-  Smoke test: 27/27 ok (files, real woff2, content, CSP/nosniff/XFO/referrer/HSTS headers).
-- Branch `fix/styleguide-audit-and-deploy` pushed, not merged into `main`. HEAD 9c93ae6 only changes
-  deploy/ and CLAUDE.md (not deployed, no redeploy needed).
-- Source IPs blocked on aufner.org ports 22/80/443 (TCP refused, ICMP fine): school IP <school IP>
-  since 2026-10-13 ~15:40 (still on 2026-10-14 09:44, likely long ban) and m11x <m11x IP> since
-  right after the deploy. Probable trigger: blocked-path probes (/.git/HEAD etc.) in the smoke test.
-  Now opt-in (`DEPLOY_PROBE_BLOCKED=1`). Unconfirmed; check Plesk > Tools > IP Address Banning.
-- Server dir `peter.aufner.org/` still contains legacy leftovers from an earlier whole-repo copy:
-  agents.md, .gitignore, .gitmodules, .kilocode/, media/ (original portrait with EXIF), plus unknown
-  `httpdocs/` and `gragustl2026/`. Not removed (not requested). Exposure could not be verified (blocked).
-  .htaccess blocks dotfiles and *.md.
-- Sibling repo ~/code/prof.aufner.org was changed by someone else in parallel: now on `main` with commit
-  19e5e3e (DEPLOY_VIA jump host) on top of my multiplexing commit a741658. Variable name differs from
-  DEPLOY_JUMP here. Its blocked-path probes are still there and likely ban the IP on every deploy.
+- LIVE: `main` 80372c7 deployed 2026-11-14 ~18:45 directly (first SSH attempt worked, no jump host). Smoke test all ok. Live check with a desktop User-Agent: `#offenlegung` present; `/media/…portrait.jpg`, `/gragustl2026/`, `/httpdocs/` answer 404.
+- D14 A: provider disclosure (§ 25 MedienG, § 5 ECG; name, Graz, `peter@aufner.org`, purpose) in the footer, anchor `#offenlegung`; the site has no privacy page. Wording mirrors prof.aufner.org.
+- D31 A: copy unchanged. Server: removed `agents.md`, `.gitignore`, `.gitmodules`, `.kilocode/`, `media/` (EXIF portrait). Moved `httpdocs/` (Plesk "Hier entsteht eine neue Webseite" placeholder) and `gragustl2026/` (school material: Word, PowerPoint, Excel exercises) to `~/peter.aufner.org-outside-docroot-20261114/` on the host. Backups: `.scratch/deploy-backups/peter.aufner.org-leftovers-20261114-184349.tar.gz` (fresh) and the 2026-10-20 full backup (md5-identical for these folders).
+- Deploy script: jump host variable is now `DEPLOY_VIA` (as in prof.aufner.org), `DEPLOY_JUMP` kept as alias. AGENTS.md updated with the D14/D31 decisions and the map's aufner.org rule (one SSH attempt, fallback `DEPLOY_VIA=m11x`, no agent fetches of the live site).
 
-## Pending decisions (user)
-- Unban both IPs in Plesk (or wait). Do not deploy again until then; a redeploy is only needed for site changes.
-- Remove legacy leftovers on the server? (backup exists; `httpdocs` and `gragustl2026` need your call).
-- Same probe fix for prof.aufner.org/deploy/deploy.sh; align DEPLOY_VIA / DEPLOY_JUMP naming.
-- Merge `fix/styleguide-audit-and-deploy` into `main`; track README.md (`!README.md`).
-- Copy decisions untouched: spaced en dashes, "X statt Y" phrasing, missing Impressum.
+## Needs Peter (optional)
+- `peter.aufner.org/gragustl2026/` is offline now. If students still use it: `ssh aufner.org 'mv peter.aufner.org-outside-docroot-20261114/gragustl2026 peter.aufner.org/'` (the deploy's stale-file cleanup only touches files listed in `.deploy-manifest`, so it would survive later deploys).
+- Not decided, only an option: a short privacy notice (GDPR Art. 13: Plesk access logs store IPs) for this site. Today it has none; the D14 disclosure covers MedienG/ECG only.
 
-## Housekeeping 2026-11-01
-- `.scratch/` cleaned; the only deploy backup left is `.scratch/deploy-backups/peter.aufner.org-20261020-151458.tar.gz`.
+## Leftovers from earlier sessions (still open, not part of this brief)
+- prof.aufner.org deploy script still sends blocked-path probes (that repo's session).
+- README.md is ignored by `*.md` (track it with `!README.md`?).
