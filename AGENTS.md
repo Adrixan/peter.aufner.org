@@ -54,3 +54,14 @@ and SVG for it, so violations fail the deploy.
   backup `.scratch/deploy-backups/peter.aufner.org-leftovers-20261114-184349.tar.gz`. The docroot holds
   only the deploy allowlist plus `.deploy-manifest`.
 
+
+## Decisions (Peter, 2026-11-15, `Open tasks.md` D52)
+- `/gragustl2026/` (school material) stays offline outside the docroot (`~/peter.aufner.org-outside-docroot-20261114/`
+  on the host). Settled: do not restore it unless Peter asks (restore = one `mv` back into `peter.aufner.org/`).
+- Short GDPR Art. 13 privacy notice for the server logs lives in the footer next to `#offenlegung` as `#datenschutz`
+  (one paragraph, no separate page). Facts it states that must stay true (change the text with them): controller
+  Peter Aufner, Graz, `peter@aufner.org`; logged fields IP, time, URL, status, bytes, referrer, user agent; purpose
+  secure operation, Art. 6(1)(f); netcup GmbH (Germany) as processor, AVV signed (see prof.aufner.org AGENTS.md);
+  Plesk logs rotated daily, 14 rotated files kept, so at most 15 days (checked on the host 2026-11-15); no cookies,
+  no Local Storage, no third-party requests; rights Art. 15 to 21, complaint to the Datenschutzbehörde.
+  Adding cookies, analytics, embeds or a form requires updating this paragraph in the same change.
