@@ -62,6 +62,6 @@ and SVG for it, so violations fail the deploy.
   (one paragraph, no separate page). Facts it states that must stay true (change the text with them): controller
   Peter Aufner, Graz, `peter@aufner.org`; logged fields IP, time, URL, status, bytes, referrer, user agent; purpose
   secure operation, Art. 6(1)(f); netcup GmbH (Germany) as processor, AVV signed (see prof.aufner.org AGENTS.md);
-  Plesk logs rotated daily, 14 rotated files kept, so at most 15 days (checked on the host 2026-11-15); no cookies,
+  Plesk logs rotated daily: current log, then `.processed`, then 14 rotated files, so at most 16 days (re-checked on the host 2026-11-15 06:30: oldest entry 30 Oct 13:13 still present, page says "spätestens nach 16 Tagen", same as prof.aufner.org); no cookies,
   no Local Storage, no third-party requests; rights Art. 15 to 21, complaint to the Datenschutzbehörde.
   Adding cookies, analytics, embeds or a form requires updating this paragraph in the same change.
