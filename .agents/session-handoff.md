@@ -1,7 +1,7 @@
 # Session handoff: peter.aufner.org (2026-11-15, D52 follow-up)
 
 ## Trajectory
-Brief from the Greeter via `rc code --brief`: follow-up to the D52 privacy notice (Peter's tick, `Open tasks.md` line 141, verified in the saved 05:14 copy). Code reported that prof.aufner.org's host check found 15 to 16 days of log retention; task was to verify the same here and align the text.
+Brief from the Greeter via `rc code --brief`: follow-up to the D52 privacy notice (Peter's tick, `~/code/.agents/archive/open-tasks-2026-11-15.md` line 141, verified in the saved 05:14 copy). Code reported that prof.aufner.org's host check found 15 to 16 days of log retention; task was to verify the same here and align the text.
 
 ## State
 - LIVE: `main` 17274cc (commit 002a4fc), deployed 2026-11-15 ~06:35 by direct SSH (`deploy/deploy.sh` printed "Done: 17274cc live"); smoke test all ok (files, content, security headers); live check with a desktop User-Agent shows "rotiert und spätestens nach 16 Tagen gelöscht".

@@ -43,7 +43,7 @@ and SVG for it, so violations fail the deploy.
 - New or changed HTML, CSS and client-side JS start from skill `modern-web-guidance` (installed CLI `modern-web-guidance`, not `npx`) and are checked in the browser with the `chrome-devtools` MCP.
 - One-off modernization: `web-modernize` (2026-11-15, list `~/sync/ai/web-projects.txt`) runs `legacy-scan`, applies only verified behaviour-preserving fixes through this file's test and publish rules, and files larger changes in `.agents/to-do.md`; after that the rule above is the standard for all web work here.
 
-## Decisions (Peter, 2026-11-14, `Open tasks.md` D14 and D31)
+## Decisions (Peter, 2026-11-14, `~/code/.agents/archive/open-tasks-2026-11-15.md` D14 and D31)
 - D14 A: provider disclosure (§ 25 MedienG, § 5 ECG) stays minimal: name, Graz, contact `peter@aufner.org`,
   purpose of the site, no address block, no Impressum. The site has no privacy page, so it sits in the
   footer (`#offenlegung`, same wording as prof.aufner.org `/datenschutz/#offenlegung`). Keep it there.
@@ -55,7 +55,7 @@ and SVG for it, so violations fail the deploy.
   only the deploy allowlist plus `.deploy-manifest`.
 
 
-## Decisions (Peter, 2026-11-15, `Open tasks.md` D52)
+## Decisions (Peter, 2026-11-15, `~/code/.agents/archive/open-tasks-2026-11-15.md` D52)
 - `/gragustl2026/` (school material) stays offline outside the docroot (`~/peter.aufner.org-outside-docroot-20261114/`
   on the host). Settled: do not restore it unless Peter asks (restore = one `mv` back into `peter.aufner.org/`).
 - Short GDPR Art. 13 privacy notice for the server logs lives in the footer next to `#offenlegung` as `#datenschutz`
