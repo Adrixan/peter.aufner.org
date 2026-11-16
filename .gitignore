@@ -3,6 +3,8 @@ node_modules
 
 # Project instructions for AI harnesses are tracked despite the *.md rule above
 !CLAUDE.md
+# The README documents the repo for humans (tracked since 2026-11-16)
+!README.md
 
 # Local-only: deploy build/backups, preview-server config
 .scratch/

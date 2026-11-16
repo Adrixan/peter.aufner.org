@@ -65,3 +65,7 @@ and SVG for it, so violations fail the deploy.
   Plesk logs rotated daily: current log, then `.processed`, then 14 rotated files, so at most 16 days (re-checked on the host 2026-11-15 06:30: oldest entry 30 Oct 13:13 still present, page says "spätestens nach 16 Tagen", same as prof.aufner.org); no cookies,
   no Local Storage, no third-party requests; rights Art. 15 to 21, complaint to the Datenschutzbehörde.
   Adding cookies, analytics, embeds or a form requires updating this paragraph in the same change.
+
+## Decisions (Peter, 2026-11-16)
+- Browser support: Baseline Widely available is the floor for HTML, CSS and JS (features shipped in all major
+  browsers for at least 30 months). Newer features only as progressive enhancement with a working fallback.
