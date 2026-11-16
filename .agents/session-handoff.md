@@ -1,16 +1,26 @@
-# Session handoff: peter.aufner.org (2026-11-15, D52 follow-up)
+# Session handoff: peter.aufner.org (2026-11-16, README tracking and DEPLOY_VIA check)
 
 ## Trajectory
-Brief from the Greeter via `rc code --brief`: follow-up to the D52 privacy notice (Peter's tick, `~/code/.agents/archive/open-tasks-2026-11-15.md` line 141, verified in the saved 05:14 copy). Code reported that prof.aufner.org's host check found 15 to 16 days of log retention; task was to verify the same here and align the text.
+Brief from the dispatcher via `rc code --brief` (Peter, 2026-11-15 ~08:05: retire the shared open-tasks list, ask remaining
+decisions directly, sessions with remaining work proceed). Tasks: track README.md; confirm the DEPLOY_JUMP vs DEPLOY_VIA
+alignment from 2026-11-14.
 
 ## State
-- LIVE: `main` 17274cc (commit 002a4fc), deployed 2026-11-15 ~06:35 by direct SSH (`deploy/deploy.sh` printed "Done: 17274cc live"); smoke test all ok (files, content, security headers); live check with a desktop User-Agent shows "rotiert und spätestens nach 16 Tagen gelöscht".
-- Host check 2026-11-15 06:30, `~/logs/peter.aufner.org/`: current `access_ssl_log` (since 14 Nov 18:44), `.processed` (13 Nov 14:37 to 14 Nov 00:21), `.processed.1` to `.14`; `.14` still holds entries from 30 Oct 13:13, deleted at the next daily rotation (about 11:45), so the maximum is just under 16 days. Same layout for `access_log` and `error_log`. AGENTS.md D52 fact line updated to "at most 16 days" with the evidence.
-- Privacy notice `#datenschutz` otherwise unchanged; `/gragustl2026/` stays offline (record only).
-- web-modernize 2026-11-15 (earlier run): report `~/sync/ai/web-modernize/2026-11-15/peter.aufner.org.md`; `js/main.js:147` IME match is a verified false positive.
+- DEPLOY_VIA alignment: complete. `deploy/deploy.sh:29` reads `DEPLOY_VIA`, falls back to `DEPLOY_JUMP`; header comment and
+  AGENTS.md document both; same name as prof.aufner.org and the knowledge map fallback (`DEPLOY_VIA=m11x`). No other file
+  used `DEPLOY_JUMP` (commits ba3f49b, 4f6c40f).
+- README.md now tracked (`!README.md` in `.gitignore`), refreshed: DEPLOY_VIA fallback, points to AGENTS.md instead of
+  CLAUDE.md, `plans/` marked local-only, AGENTS.md and `.agents/` in the layout, new "Legal" section (`#offenlegung`,
+  `#datenschutz`). Not part of the deploy allowlist, so no deploy needed; `deploy/deploy.sh --dry-run` passes.
+- Peter chose 2026-11-16: browser support floor = Baseline Widely available (recorded in AGENTS.md).
+- LIVE unchanged: 17274cc (deployed 2026-11-15 ~06:35).
 
-## Open (low, optional)
-- README.md is ignored by `*.md` (track with `!README.md`?); no browser-support policy in AGENTS.md (Baseline Widely available applied).
+## Notes (low, no action needed)
+- `media/Peter.Aufner.portrait.jpg` (tracked, public repo, not deployed) still has EXIF: camera model SM-S908B and
+  2024-11-08 timestamp, no GPS. Removing it from history would need a force-push (forbidden), so left as is.
+
+## Open decisions
+None.
 
 ## Needs Peter
 Nothing.
